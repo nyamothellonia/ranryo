@@ -118,18 +118,18 @@
             computed: {
                 result_level: function () {
                     // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
-                    return (( this.adjustment_atk - this.level_1_atk) * (this.max_level - 1)) / (this.level_max_atk - this.level_1_atk) + 1;
+                    return Math.floor(( ( this.adjustment_atk - this.level_1_atk) * (this.max_level - 1)) / (this.level_max_atk - this.level_1_atk) + 1);
                 },
 
                 result_atk: function () {
-                    return this.level_1_atk + (this.result_level * this.result_1_atk);
+                    return this.level_1_atk + ((this.result_level-1) * this.result_1_atk);
                 },
                 result_1_atk: function () {
                     return (this.level_max_atk - this.level_1_atk) / ( this.max_level - 1);
                 }
                 ,
                 result_level_formatted: function () {
-                    return this.formatValue(this.result_level);
+                    return this.result_level;
                 },
                 result_atk_formatted: function () {
                     return this.formatValue(this.result_atk);
