@@ -2,7 +2,7 @@
 <html lang="jp">
 <head>
     <meta charset="UTF-8">
-    <title>蘭陵王調整手助けツール</title>
+    <title>蘭陵王調整手助け - ツール</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,7 +24,7 @@
 <body style="background-color:#fcfcfc">
 <div class="container">
     <div class="page-header">
-        <h1>蘭陵王調整ツール</h1>
+        <h1>蘭陵王調整手助け - ツール</h1>
     </div>
     <div id="app">
 
@@ -92,64 +92,74 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="form-group">
+                調整レベルの計算式
+                <code>
+                    (((目標ATK)-(Lv1ATK) )×(最大LV-1) / (LvMaxATK)-(Lv1ATK)) + 1
+                </code>
+
+                <div>
+                    ※ 計算結果は保証しないので、参考程度にしてください。
+                </div>
+
+            </div>
         </form>
-        調整レベルの計算式
-        <code>
-            (((目標ATK)-(Lv1ATK) )×(最大LV-1) / (LvMaxATK)-(Lv1ATK)) + 1
-        </code>
-
-        <div>
-            ※ 計算結果は保証しないので、参考程度にしてください。
-        </div>
-        <div>
-            作成者 : <a href="https://twitter.com/nyam_othellonia">にゃも(@nyam_othellonia)</a>
-        </div>
     </div>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!',
-                adjustment_atk: 1012,
-                max_level: 80,
-                level_1_atk: 0,
-                level_max_atk: 0,
-            },
-            computed: {
-                result_level: function () {
-                    // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
-                    return Math.floor(( ( this.adjustment_atk - this.level_1_atk) * (this.max_level - 1)) / (this.level_max_atk - this.level_1_atk) + 1);
-                },
+</div>
 
-                result_atk: function () {
-                    return this.level_1_atk + ((this.result_level-1) * this.result_1_atk);
-                },
-                result_1_atk: function () {
-                    return (this.level_max_atk - this.level_1_atk) / ( this.max_level - 1);
-                }
-                ,
-                result_level_formatted: function () {
-                    return this.result_level;
-                },
-                result_atk_formatted: function () {
-                    return this.formatValue(this.result_atk);
-                },
-                result_1_atk_formatted: function () {
-                    return this.formatValue(this.result_1_atk);
-                }
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted"> 作成者 : <a href="https://twitter.com/nyam_othellonia">にゃも(@nyam_othellonia)</a>
+            .</p>
+    </div>
+</footer>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            adjustment_atk: 1012,
+            max_level: 80,
+            level_1_atk: 0,
+            level_max_atk: 0,
+        },
+        computed: {
+            result_level: function () {
+                // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
+                return Math.floor(( ( this.adjustment_atk - this.level_1_atk) * (this.max_level - 1)) / (this.level_max_atk - this.level_1_atk) + 1);
             },
 
-            methods: {
+            result_atk: function () {
+                return this.level_1_atk + ((this.result_level - 1) * this.result_1_atk);
+            },
+            result_1_atk: function () {
+                return (this.level_max_atk - this.level_1_atk) / ( this.max_level - 1);
+            }
+            ,
+            result_level_formatted: function () {
+                return this.formatValue(this.result_level);
+            },
+            result_atk_formatted: function () {
+                return this.formatValue(this.result_atk);
+            },
+            result_1_atk_formatted: function () {
+                return this.formatValue(this.result_1_atk);
+            }
+        },
 
-                formatValue: function (num) {
-                    if (isFinite(num)) {
-                        return Math.floor((parseFloat(num) * 100)) / 100;
-                    } else {
-                        return "無効な値です";
-                    }
+        methods: {
+
+            formatValue: function (num) {
+                if (isFinite(num)) {
+                    return Math.floor((parseFloat(num) * 100)) / 100;
+                } else {
+                    return "計算不可";
                 }
             }
-        })
-    </script>
+        }
+    })
+</script>
 </body>
 </html>
