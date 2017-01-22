@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>蘭陵王調整手助けツール</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body style="background-color:#fcfcfc">
+<div class="container">
+    <div class="page-header">
+        <h1>蘭陵王調整ツール</h1>
+    </div>
+    <div id="app">
+
+        <form>
+            <div class="form-group">
+                <h2>リーダー駒の選択</h2>
+                <input type="radio" id="adjust_ran" name="atk_group" value="1012" v-model="adjustment_atk">
+                <label for="adjust_ran">蘭陵王</label>
+                <input type="radio" id="adjust_new_ran" name="atk_group" value="848" v-model="adjustment_atk">
+                <label for="adjust_new_ran">ニューイヤー・蘭陵王</label>
+
+            </div>
+            調整ATK : <span>{{ adjustment_atk }}</span>
+
+            <h2>調整対象駒の設定</h2>
+
+            <div class="form-group">
+                <input type="radio" id="rank_a" name="level_group" value="80" v-model="max_level"> <label
+                    for="rank_a">A駒</label>
+                <input type="radio" id="rank_s" name="level_group" value="100" v-model="max_level"> <label
+                    for="rank_s">S駒</label>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="level1-atk">Lv.1のATK</span>
+                    <input type="number" class="form-control" aria-describedby="level1-atk" value=""
+                           v-model="level_1_atk"
+                           placeholder="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="levelmax-atk" width="500px">Lv.{{max_level}}のATK</span>
+                    <input type="number" class="form-control" aria-describedby="levelmax-atk" value=""
+                           v-model="level_max_atk"
+                           placeholder="">
+                </div>
+            </div>
+
+            <div>
+                <h2>結果</h2>
+                <table class="table table-striped">
+
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>結果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">調整レベル</th>
+                        <td>{{result_level_formatted}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">調整後ATK</th>
+                        <td>{{result_atk_formatted}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1レベでのATKの上がり値</th>
+                        <td>{{result_1_atk_formatted}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        計算式
+        <code>
+            (((目標ATK)-(Lv1ATK) )×(最大LV-1) / (LvMaxATK)-(Lv1ATK)) + 1
+        </code>
+        <div>
+            ※ 計算結果は保証しないので、参考程度にしてください。
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                adjustment_atk: 1012,
+                max_level: 80,
+                level_1_atk: 0,
+                level_max_atk: 0,
+            },
+            computed: {
+                result_level: function () {
+                    // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
+                    return (( this.adjustment_atk - this.level_1_atk) * (this.max_level - 1)) / (this.level_max_atk - this.level_1_atk) + 1;
+                },
+
+                result_atk: function () {
+                    return this.level_1_atk + (this.result_level * this.result_1_atk);
+                },
+                result_1_atk: function () {
+                    return (this.level_max_atk - this.level_1_atk) / ( this.max_level - 1);
+                }
+                ,
+                result_level_formatted: function () {
+                    return this.formatValue(this.result_level);
+                },
+                result_atk_formatted: function () {
+                    return this.formatValue(this.result_atk);
+                },
+                result_1_atk_formatted: function () {
+                    return this.formatValue(this.result_1_atk);
+                }
+            },
+
+            methods: {
+
+                formatValue: function (num) {
+                    if (isFinite(num)) {
+                        return Math.floor((parseFloat(num) * 100)) / 100;
+                    } else {
+                        return "無効な値です";
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

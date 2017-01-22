@@ -1,0 +1,11 @@
+{
+  "name": "170122_othellonia_ranryoo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nyam_othellonia <nyam_othellonia@gmail.com>",
+  "license": "MIT"
+}
