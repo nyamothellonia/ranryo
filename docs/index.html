@@ -134,14 +134,14 @@
         computed: {
             result_level: function () {
                 // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
-                return Math.floor(( ( this.adjustment_atk - this.level_1_atk) * (this.max_level - 1)) / (this.level_max_atk - this.level_1_atk) + 1);
+                return Math.floor(( ( parseInt(this.adjustment_atk) - parseInt(this.level_1_atk)) * (parseInt(this.max_level) - 1)) / (parseInt(this.level_max_atk) - parseInt(this.level_1_atk)) + 1);
             },
 
             result_atk: function () {
-                return this.level_1_atk + ((this.result_level - 1) * this.result_1_atk);
+                return parseInt(this.level_1_atk) + ((this.result_level - 1) * this.result_1_atk);
             },
             result_1_atk: function () {
-                return (this.level_max_atk - this.level_1_atk) / ( this.max_level - 1);
+                return (parseInt(this.level_max_atk) - parseInt(this.level_1_atk)) / ( this.max_level - 1);
             }
             ,
             result_level_formatted: function () {
