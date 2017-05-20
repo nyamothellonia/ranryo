@@ -32,9 +32,13 @@
             <div class="form-group">
                 <h2>リーダー駒の選択</h2>
                 <input type="radio" id="adjust_ran" name="atk_group" value="1012" v-model="adjustment_atk">
-                <label for="adjust_ran">蘭陵王</label>
+                <label for="adjust_ran">[武麗君]蘭陵王</label>
+
                 <input type="radio" id="adjust_new_ran" name="atk_group" value="848" v-model="adjustment_atk">
-                <label for="adjust_new_ran">ニューイヤー・蘭陵王</label>
+                <label for="adjust_new_ran">[笑福到来]蘭陵王</label>
+
+                <input type="radio" id="adjust_new_land" name="atk_group" value="1188" v-model="adjustment_atk">
+                <label for="adjust_new_ran">[地城竜]ランドタイラント</label>
 
             </div>
             目標ATK : <span>{{ adjustment_atk }}</span>
