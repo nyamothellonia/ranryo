@@ -1,219 +1,237 @@
 <!DOCTYPE html>
 <html lang="jp">
 <head>
-  <meta charset="UTF-8">
-  <title>蘭陵王調整手助け - ツール</title>
+    <meta charset="UTF-8">
+    <title>蘭陵王調整手助け - ツール</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-          crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 <body style="background-color:#fcfcfc">
 <div class="container">
-  <div class="page-header">
-    <h1>蘭陵王調整手助け - ツール</h1>
-  </div>
-  <div id="app">
+    <div class="page-header">
+        <h1>蘭陵王調整手助け - ツール</h1>
+    </div>
+    <div id="app">
 
-    <form>
-      <div class="form-group">
-        <h2>調整目標ATKの入力</h2>
-      </div>
+        <form>
+            <div class="form-group">
+                <h2>調整目標ATKの入力</h2>
+            </div>
 
-      <div class="form-group">
-        <div class="input-group">
-          <span class="input-group-addon" id="target-atk">目標ATK</span>
-          <input type="number" class="form-control" aria-describedby="target-atk" value=""
-                 v-model="adjustment_atk"
-                 placeholder="">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="target-atk">目標ATK</span>
+                    <input type="number" class="form-control" aria-describedby="target-atk" value=""
+                           v-model="adjustment_atk"
+                           placeholder="">
 
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          目標ATKを一覧から選択する
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <h5>【オーラ全属性】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(1012)"><b>ATK:1012</b> [武麗君]蘭陵王/[秘宝探求]ムーニア</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(1229)"><b>ATK:1229</b>[地帝竜]ランドタイラント</a></li>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    目標ATKを一覧から選択する
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <h5>【オーラ全属性】</h5>
+                    <li><a href="#" v-on:click="setAdjustAtk(1012)"><b>ATK:1012</b> [武麗君]蘭陵王/[秘宝探求]ムーニア</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1229)"><b>ATK:1229</b>[地帝竜]ランドタイラント</a></li>
 
-          <h5>【オーラ神のみ】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(848)"><b>ATK:848</b> [笑福到来]蘭陵王</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(796)"><b>ATK:796</b> [天廟を開きし者]ムーニア</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(758)"><b>ATK:758</b> [幸せ応援団]フェリタ＆プティ</a></li>
+                    <h5>【オーラ神のみ】</h5>
+                    <li><a href="#" v-on:click="setAdjustAtk(848)"><b>ATK:848</b> [笑福到来]蘭陵王</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(796)"><b>ATK:796</b> [天廟を開きし者]ムーニア</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(758)"><b>ATK:758</b> [幸せ応援団]フェリタ＆プティ</a></li>
 
-          <h5>【オーラ魔のみ】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(1081)"><b>ATK:1081</b> [黒蝶の魔女]アズマリア </a></li>
-          <h5>【オーラ竜のみ】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(1188)"><b>ATK:1188</b> [地城竜]ランドタイラント</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(1099)"><b>ATK:1099</b> [聖竜騎士]レジェ </a></li>
-        </ul>
-      </div>
+                    <h5>【オーラ魔のみ】</h5>
+                    <li><a href="#" v-on:click="setAdjustAtk(1081)"><b>ATK:1081</b> [黒蝶の魔女]アズマリア </a></li>
+                    <h5>【オーラ竜のみ】</h5>
+                    <li><a href="#" v-on:click="setAdjustAtk(1188)"><b>ATK:1188</b> [地城竜]ランドタイラント</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1099)"><b>ATK:1099</b> [聖竜騎士]レジェ </a></li>
+                </ul>
+            </div>
 
-      <h2>調整対象駒の設定</h2>
+            <h2>調整対象駒の設定</h2>
 
-      <div class="form-group">
-        <input type="radio" id="rank_b" name="level_group" value="30" v-model="max_level"> <label
-              for="rank_b">B駒</label>
-        <input type="radio" id="rank_a" name="level_group" value="45" v-model="max_level"> <label
-              for="rank_a">A駒</label>
-        <input type="radio" id="rank_aplus" name="level_group" value="80" v-model="max_level" cheked> <label
-              for="rank_aplus">A+駒</label>
-        <input type="radio" id="rank_s" name="level_group" value="50" v-model="max_level"> <label
-              for="rank_s">S駒</label>
-        <input type="radio" id="rank_splus" name="level_group" value="99" v-model="max_level"> <label
-              for="rank_splus">S+駒</label>
-      </div>
+            <div class="form-group">
+                <label for="rank_b">
+                    <input type="radio" id="rank_b" name="level_group" value="30" v-model="max_level">
+                    B駒
+                </label>
+                <label for="rank_a">
+                    <input type="radio" id="rank_a" name="level_group" value="45" v-model="max_level">
+                    A駒
+                </label>
+                <label for="rank_aplus">
+                    <input type="radio" id="rank_aplus" name="level_group" value="80" v-model="max_level" cheked>
+                    A+駒
+                </label>
+                <label for="rank_s">
+                    <input type="radio" id="rank_s" name="level_group" value="50" v-model="max_level">
+                    S駒
+                </label>
+                <label for="rank_splus">
+                    <input type="radio" id="rank_splus" name="level_group" value="99" v-model="max_level">
+                    S+駒
+                </label>
+            </div>
 
-      <div class="form-group">
-        <div class="input-group">
-          <span class="input-group-addon" id="level1-atk">Lv.1のATK</span>
-          <input type="number" class="form-control" aria-describedby="level1-atk" value=""
-                 v-model="level_1_atk"
-                 placeholder="">
-        </div>
-      </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="level1-atk">Lv.1のATK</span>
+                    <input type="number" class="form-control" aria-describedby="level1-atk" value=""
+                           v-model="level_1_atk"
+                           placeholder="">
+                </div>
+            </div>
 
-      <div class="form-group">
-        <div class="input-group">
-          <span class="input-group-addon" id="levelmax-atk" width="500px">Lv.{{max_level}}のATK</span>
-          <input type="number" class="form-control" aria-describedby="levelmax-atk" value=""
-                 v-model="level_max_atk"
-                 placeholder="">
-        </div>
-      </div>
-      <div>
-        <small>※ Lv.1のATK、Lv.MaxのATKは<a
-              href="https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8">オセロニア公式攻略wiki</a>から確認できます。
-        </small>
-      </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="levelmax-atk" width="500px">Lv.{{max_level}}のATK</span>
+                    <input type="number" class="form-control" aria-describedby="levelmax-atk" value=""
+                           v-model="level_max_atk"
+                           placeholder="">
+                </div>
+            </div>
+            <div>
+                <small>※ Lv.1のATK、Lv.MaxのATKは<a
+                        href="https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8">オセロニア公式攻略wiki</a>から確認できます。
+                </small>
+            </div>
 
-      <div>
-        <h2>結果</h2>
-        <table class="table table-striped">
+            <div>
+                <h2>結果</h2>
+                <table class="table table-striped">
 
-          <thead class="thead-inverse">
-          <tr>
-            <th>#</th>
-            <th>結果</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">調整レベル</th>
-            <td>{{result_level_formatted}}</td>
-          </tr>
-          <tr>
-            <th scope="row">調整後ATK</th>
-            <td>{{result_atk_formatted}}</td>
-          </tr>
-          <tr>
-            <th scope="row">1レベでのATKの上がり値</th>
-            <td>{{result_1_atk_formatted}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>結果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">調整レベル</th>
+                        <td>{{result_level_formatted}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">調整後ATK</th>
+                        <td>{{result_atk_formatted}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1レベでのATKの上がり値</th>
+                        <td>{{result_1_atk_formatted}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-      <div class="form-group">
-        調整レベルの計算式 :
-        <code>
-          (((目標ATK)-(Lv.1 ATK) )×(Lv.Max-1) / (Lv.Max ATK)-(Lv.1 ATK)) + 1
-        </code>
+            <div class="form-group">
+                調整レベルの計算式 :
+                <code>
+                    (((目標ATK)-(Lv.1 ATK) )×(Lv.Max-1) / (Lv.Max ATK)-(Lv.1 ATK)) + 1
+                </code>
 
-        <p>
-          ※ 計算結果は保証しないので、参考程度にしてください。
-        </p>
+                <p>
+                    ※ 計算結果は保証しないので、参考程度にしてください。
+                </p>
 
-        <p><a href="data.html">▶ 蘭陵王調整手助け - データ</a></p>
-      </div>
-    </form>
-  </div>
+                <p><a href="data.html">▶ 蘭陵王調整手助け - データ</a></p>
+            </div>
+        </form>
+    </div>
 
-  <p>
-    <a href="https://twitter.com/nyam_othellonia">
-      <img src="images/igel_othello.png" width="30">
-      作成者：
-      にゃも♡イーゲル@オセロニア
-    </a>
-  </p>
+    <p>
+        <a href="https://twitter.com/nyam_othellonia">
+            <img src="images/igel_othello.png" width="30">
+            作成者：
+            にゃも♡イーゲル@オセロニア
+        </a>
+    </p>
 </div>
 
 <script>
 
-  var app = new Vue({
-    el: '#app',
-    data: {
-      message: 'Hello Vue!',
-      adjustment_atk: 1012,
-      max_level: 80,
-      level_1_atk: 0,
-      level_max_atk: 0,
-    },
-    computed: {
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            adjustment_atk: 1012,
+            max_level: 80,
+            level_1_atk: 0,
+            level_max_atk: 0,
+        },
+        computed: {
 
-      result_level: function () {
-        // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
-        return Math.floor(( ( parseInt(this.adjustment_atk) - parseInt(this.level_1_atk)) * (parseInt(this.max_level) - 1)) / (parseInt(this.level_max_atk) - parseInt(this.level_1_atk)) + 1);
-      },
+            result_level: function () {
+                // ( ( (目標ATK)-(Lv1ATK) )×79 / (LvMaxATK)-(Lv1ATK) ) + 1
+                return Math.floor(( ( parseInt(this.adjustment_atk) - parseInt(this.level_1_atk)) * (parseInt(this.max_level) - 1)) / (parseInt(this.level_max_atk) - parseInt(this.level_1_atk)) + 1);
+            },
 
-      result_atk: function () {
-        return parseInt(this.level_1_atk) + ((this.result_level - 1) * this.result_1_atk);
-      },
-      result_1_atk: function () {
-        return (parseInt(this.level_max_atk) - parseInt(this.level_1_atk)) / ( this.max_level - 1);
-      }
-      ,
-      result_level_formatted: function () {
-        return this.formatValue(this.result_level);
-      },
-      result_atk_formatted: function () {
-        return this.formatValue(this.result_atk);
-      },
-      result_1_atk_formatted: function () {
-        return this.formatValue(this.result_1_atk);
-      }
-    },
+            result_atk: function () {
+                return parseInt(this.level_1_atk) + ((this.result_level - 1) * this.result_1_atk);
+            },
+            result_1_atk: function () {
+                return (parseInt(this.level_max_atk) - parseInt(this.level_1_atk)) / ( this.max_level - 1);
+            }
+            ,
+            result_level_formatted: function () {
+                return this.formatValue(this.result_level);
+            },
+            result_atk_formatted: function () {
+                return this.formatValue(this.result_atk);
+            },
+            result_1_atk_formatted: function () {
+                return this.formatValue(this.result_1_atk);
+            }
+        },
 
-    methods: {
-      setAdjustAtk: function (value) {
-        this.adjustment_atk = parseInt(value);
-      },
-      formatValue: function (num) {
-        if (isFinite(num)) {
-          return Math.floor((parseFloat(num) * 100)) / 100;
-        } else {
-          return "計算不可";
+        methods: {
+            setAdjustAtk: function (value) {
+                this.adjustment_atk = parseInt(value);
+            },
+            formatValue: function (num) {
+                if (isFinite(num)) {
+                    return Math.floor((parseFloat(num) * 100)) / 100;
+                } else {
+                    return "計算不可";
+                }
+            }
         }
-      }
-    }
-  })
+    })
 </script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-101029652-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-101029652-1', 'auto');
+    ga('send', 'pageview');
 
 </script>
 </body>

@@ -11,3 +11,9 @@
     -webkit-tap-highlight-color:#eeeeee;
 }
 
+label {
+    padding:5px;
+}
+label, input[type='checkbox'] {
+    cursor: pointer;
+}
