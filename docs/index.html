@@ -51,28 +51,35 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
           <h5>【オーラ全属性】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(1012)"><b>ATK:1012</b>［武麗君］蘭陵王/［秘宝探求］ムーニア</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(1229)"><b>ATK:1229</b>［地帝竜］ランドタイラント</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1012)"><b>ATK:1012</b> [武麗君]蘭陵王/[秘宝探求]ムーニア</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1229)"><b>ATK:1229</b>[地帝竜]ランドタイラント</a></li>
 
           <h5>【オーラ神のみ】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(848)"><b>ATK:848</b>［笑福到来］蘭陵王</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(796)"><b>ATK:796</b>［天廟を開きし者］ムーニア</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(848)"><b>ATK:848</b> [笑福到来]蘭陵王</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(796)"><b>ATK:796</b> [天廟を開きし者]ムーニア</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(758)"><b>ATK:758</b> [幸せ応援団]フェリタ＆プティ</a></li>
 
           <h5>【オーラ魔のみ】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(1081)"><b>ATK:1081</b>［黒蝶の魔女］アズマリア </a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1081)"><b>ATK:1081</b> [黒蝶の魔女]アズマリア </a></li>
           <h5>【オーラ竜のみ】</h5>
-          <li><a href="#" v-on:click="setAdjustAtk(1188)"><b>ATK:1188</b>［地城竜］ランドタイラント</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(1099)"><b>ATK:1099</b>［聖竜騎士］レジェ </a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1188)"><b>ATK:1188</b> [地城竜]ランドタイラント</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1099)"><b>ATK:1099</b> [聖竜騎士]レジェ </a></li>
         </ul>
       </div>
 
       <h2>調整対象駒の設定</h2>
 
       <div class="form-group">
-        <input type="radio" id="rank_a" name="level_group" value="80" v-model="max_level"> <label
+        <input type="radio" id="rank_b" name="level_group" value="30" v-model="max_level"> <label
+              for="rank_b">B駒</label>
+        <input type="radio" id="rank_a" name="level_group" value="45" v-model="max_level"> <label
               for="rank_a">A駒</label>
-        <input type="radio" id="rank_s" name="level_group" value="99" v-model="max_level"> <label
+        <input type="radio" id="rank_aplus" name="level_group" value="80" v-model="max_level" cheked> <label
+              for="rank_aplus">A+駒</label>
+        <input type="radio" id="rank_s" name="level_group" value="50" v-model="max_level"> <label
               for="rank_s">S駒</label>
+        <input type="radio" id="rank_splus" name="level_group" value="99" v-model="max_level"> <label
+              for="rank_splus">S+駒</label>
       </div>
 
       <div class="form-group">
