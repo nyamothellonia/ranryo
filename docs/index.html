@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="css/main.css">
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Latest compiled and minified JavaScript -->
@@ -47,9 +50,19 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#" v-on:click="setAdjustAtk(1012)">［武麗君］蘭陵王 (ATK:1012)</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(848)">［笑福到来］蘭陵王 (ATK:848)</a></li>
-          <li><a href="#" v-on:click="setAdjustAtk(1188)">［地城竜］ランドタイラント (ATK:1188)</a></li>
+          <h5>【オーラ全属性】</h5>
+          <li><a href="#" v-on:click="setAdjustAtk(1012)"><b>ATK:1012</b>［武麗君］蘭陵王/［秘宝探求］ムーニア</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1229)"><b>ATK:1229</b>［地帝竜］ランドタイラント</a></li>
+
+          <h5>【オーラ神のみ】</h5>
+          <li><a href="#" v-on:click="setAdjustAtk(848)"><b>ATK:848</b>［笑福到来］蘭陵王</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(796)"><b>ATK:796</b>［天廟を開きし者］ムーニア</a></li>
+
+          <h5>【オーラ魔のみ】</h5>
+          <li><a href="#" v-on:click="setAdjustAtk(1081)"><b>ATK:1081</b>［黒蝶の魔女］アズマリア </a></li>
+          <h5>【オーラ竜のみ】</h5>
+          <li><a href="#" v-on:click="setAdjustAtk(1188)"><b>ATK:1188</b>［地城竜］ランドタイラント</a></li>
+          <li><a href="#" v-on:click="setAdjustAtk(1099)"><b>ATK:1099</b>［聖竜騎士］レジェ </a></li>
         </ul>
       </div>
 
