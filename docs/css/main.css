@@ -2,8 +2,10 @@
     font-size: 14px;
 
     margin-left: 10px;
+    -webkit-tap-highlight-color:#eeeeee;
 }
 
 .li:hover{
-    color: #ff0000;
+    background-color: #eeeeee;
 }
+
