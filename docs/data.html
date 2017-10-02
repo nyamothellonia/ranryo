@@ -21,19 +21,26 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="css/main.css">
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 <body>
 
 <div class="container">
     <div class="page-header">
-        <h1>蘭陵王調整手助け - データ</h1>
-    </div>
+        <h2>
+            <img src="title.png" width="30px" height="30px" >蘭陵調整手助け</h2>
 
+    </div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" ><a href="index.html">ツール</a></li>
+        <li role="presentation" class="active"><a href="#">データ</a></li>
+        <li role="presentation"><a href="help.html">ヘルプ</a></li>
+    </ul>
     <div id="app">
 
         <div v-for="data1 in data">
-            <h2>{{data1.title}}</h2>
+            <h3>{{data1.title}}</h3>
             <table class="table table-striped">
                 <thead class="thead-inverse">
                 <tr>
@@ -66,15 +73,8 @@
             </table>
         </div>
 
-        <p>※ データは保証しないので、参考程度にしてください。</p>
-        <p><a href="index.html">▶ 蘭陵王調整手助け - ツール</a></p>
-
         <p>
-            <a href="https://twitter.com/nyam_othellonia">
-                <img src="images/igel_othello.png" width="30">
-                作成者：
-                にゃも♡イーゲル@オセロニア
-            </a>
+            <small>※ データは保証しません。あくまでも参考程度にしてください。</small>
         </p>
     </div>
 

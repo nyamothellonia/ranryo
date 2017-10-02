@@ -5,15 +5,18 @@
     <title>蘭陵王調整手助け - ツール</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="shortcut icon" href="favicon.ico"> 
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/main.css">
 
-    <meta name="apple-mobile-web-app-title" content="蘭陵調整" />
+    <meta name="apple-mobile-web-app-title" content="蘭陵調整"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
@@ -26,15 +29,28 @@
 <body style="background-color:#fcfcfc">
 <div class="container">
     <div class="page-header">
-        <h1>蘭陵王調整手助け - ツール</h1>
+        <h2>
+            <img src="title.png" width="30px" height="30px" >蘭陵調整手助け</h2>
     </div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">ツール</a></li>
+        <li role="presentation"><a href="data.html">データ</a></li>
+        <li role="presentation"><a href="help.html">ヘルプ</a></li>
+    </ul>
     <div id="app">
-
         <form>
             <div class="form-group">
-                <h2>調整目標ATKの入力</h2>
-            </div>
+                <h3>調整目標ATKの入力
 
+                    <!--
+                    <button class="btn btn-link btn-sm question" data-toggle="modal"
+                            data-target="#modal-question-target1">
+                        <i class="fa fa-question-circle-o" aria-hidden="true"></i> ヘルプ - 調整目標ATKの入力
+                    </button>
+                    -->
+                </h3>
+
+            </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon" id="target-atk">目標ATK</span>
@@ -53,23 +69,31 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <h5>【オーラ全属性】</h5>
-                    <li><a href="#" v-on:click="setAdjustAtk(1012)"><b>ATK:1012</b> [武麗君]蘭陵王/[秘宝探求]ムーニア</a></li>
-                    <li><a href="#" v-on:click="setAdjustAtk(1229)"><b>ATK:1229</b>[地帝竜]ランドタイラント</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1012)">▶<b>ATK:1012</b> [武麗君]蘭陵王/[秘宝探求]ムーニア</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1229)">▶<b>ATK:1229</b> [地帝竜]ランドタイラント</a></li>
 
                     <h5>【オーラ神のみ】</h5>
-                    <li><a href="#" v-on:click="setAdjustAtk(848)"><b>ATK:848</b> [笑福到来]蘭陵王</a></li>
-                    <li><a href="#" v-on:click="setAdjustAtk(796)"><b>ATK:796</b> [天廟を開きし者]ムーニア</a></li>
-                    <li><a href="#" v-on:click="setAdjustAtk(758)"><b>ATK:758</b> [幸せ応援団]フェリタ＆プティ</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(848)">▶<b>ATK:848</b> [笑福到来]蘭陵王</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(796)">▶<b>ATK:796</b> [天廟を開きし者]ムーニア</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(758)">▶<b>ATK:758</b> [幸せ応援団]フェリタ＆プティ</a></li>
 
                     <h5>【オーラ魔のみ】</h5>
-                    <li><a href="#" v-on:click="setAdjustAtk(1081)"><b>ATK:1081</b> [黒蝶の魔女]アズマリア </a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1081)">▶<b>ATK:1081</b> [黒蝶の魔女]アズマリア </a></li>
                     <h5>【オーラ竜のみ】</h5>
-                    <li><a href="#" v-on:click="setAdjustAtk(1188)"><b>ATK:1188</b> [地城竜]ランドタイラント</a></li>
-                    <li><a href="#" v-on:click="setAdjustAtk(1099)"><b>ATK:1099</b> [聖竜騎士]レジェ </a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1188)">▶<b>ATK:1188</b> [地城竜]ランドタイラント</a></li>
+                    <li><a href="#" v-on:click="setAdjustAtk(1099)">▶<b>ATK:1099</b> [聖竜騎士]レジェ </a></li>
                 </ul>
             </div>
 
-            <h2>調整対象駒の設定</h2>
+            <h3>調整対象駒の設定
+
+                <!--
+                <button class="btn btn-link btn-sm question" data-toggle="modal"
+                        data-target="#modal-question-target2">
+                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>ヘルプ - 調整対象駒の設定
+                </button>
+                -->
+            </h3>
 
             <div class="form-group">
                 <label for="rank_b">
@@ -112,13 +136,7 @@
                 </div>
             </div>
             <div>
-                <small>※ Lv.1のATK、Lv.MaxのATKは<a
-                        href="https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8">オセロニア公式攻略wiki</a>から確認できます。
-                </small>
-            </div>
-
-            <div>
-                <h2>結果</h2>
+                <h3>結果</h3>
                 <table class="table table-striped">
 
                     <thead class="thead-inverse">
@@ -144,28 +162,20 @@
                 </table>
             </div>
 
-            <div class="form-group">
-                調整レベルの計算式 :
-                <code>
-                    (((目標ATK)-(Lv.1 ATK) )×(Lv.Max-1) / (Lv.Max ATK)-(Lv.1 ATK)) + 1
-                </code>
-
-                <p>
-                    ※ 計算結果は保証しないので、参考程度にしてください。
-                </p>
-
-                <p><a href="data.html">▶ 蘭陵王調整手助け - データ</a></p>
-            </div>
+            <small>
+                <div class="form-group">
+                    調整レベルの計算式 :
+                    <code>
+                        (((目標ATK)-(Lv.1 ATK) )×(Lv.Max-1) / (Lv.Max ATK)-(Lv.1 ATK)) + 1
+                    </code>
+                    <p>
+                        ※ 計算結果はたまにずれることがあります、レベル上げの参考程度にしてください。
+                    </p>
+                </div>
+            </small>
         </form>
     </div>
 
-    <p>
-        <a href="https://twitter.com/nyam_othellonia">
-            <img src="images/igel_othello.png" width="30">
-            作成者：
-            にゃも♡イーゲル@オセロニア
-        </a>
-    </p>
 </div>
 
 <script>
@@ -212,7 +222,7 @@
                 if (isFinite(num)) {
                     return Math.floor((parseFloat(num) * 100)) / 100;
                 } else {
-                    return "計算不可";
+                    return "-";
                 }
             }
         }
@@ -235,5 +245,60 @@
     ga('send', 'pageview');
 
 </script>
+
+
+<!-- 2.モーダルの配置 -->
+<div class="modal" id="modal-question-target1" tabindex="-1">
+    <div class="modal-dialog">
+
+        <!-- 3.モーダルのコンテンツ -->
+        <div class="modal-content">
+            <!-- 4.モーダルのヘッダ -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modal-label2">調整目標ATKの入力</h4>
+            </div>
+            <!-- 5.モーダルのボディ -->
+            <div class="modal-body">
+                [調整目標ATKの入力]では目標ATKを入力します。初期値は蘭陵王のATKの1012です。「目標ATKを一覧」にはよく調整されるオーラのATKがあり、タップするとATKが自動で入力されます。
+            </div>
+            <!-- 6.モーダルのフッタ -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2.モーダルの配置 -->
+<div class="modal" id="modal-question-target2" tabindex="-1">
+    <div class="modal-dialog">
+
+        <!-- 3.モーダルのコンテンツ -->
+        <div class="modal-content">
+            <!-- 4.モーダルのヘッダ -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modal-label">調整対象駒の設定</h4>
+            </div>
+            <!-- 5.モーダルのボディ -->
+            <div class="modal-body">
+                [調整対象駒の設定]では調整を行いたい駒のレア度の設定、Lv.1のATKとLv.Max時のATKを入力します。
+                <br>
+                Lv.1のATK、Lv.MaxのATKは<a
+                    href="https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%83%88%E3%83%83%E3%83%97%E3%83%9A%E3%83%BC%E3%82%B8">オセロニア公式攻略wiki</a>のキャラ詳細から確認できます。
+
+            </div>
+            <!-- 6.モーダルのフッタ -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
