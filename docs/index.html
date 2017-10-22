@@ -137,6 +137,7 @@
             </div>
             <div>
                 <h3>結果</h3>
+
                 <table class="table table-striped">
 
                     <thead class="thead-inverse">
@@ -148,18 +149,32 @@
                     <tbody>
                     <tr>
                         <th scope="row">調整レベル</th>
-                        <td>{{result_level_formatted}}</td>
+                        <td>
+                            <span v-bind:class="{ warning: isWarning }">{{result_level_formatted}}</span>
+                            <span v-if="isWarning" class="warning">※</span>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">調整後ATK</th>
-                        <td>{{result_atk_formatted}}</td>
+                        <td>
+                            <span v-bind:class="{ warning: isWarning }">{{result_atk_formatted}} </span>
+                            <span v-if="isWarning" class="warning">※</span>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">1レベでのATKの上がり値</th>
-                        <td>{{result_1_atk_formatted}}</td>
+                        <td>
+
+                            {{result_1_atk_formatted}}
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <div v-if="isWarning" class="warning">
+                    <p>※ 調整後ATKが調整目標のATKと近いため、調整に失敗する可能性があります。 </p>
+                    <p>※ 調整時は結果よりレベル1低めをおすすめします。</p>
+                </div>
             </div>
 
             <small>
@@ -187,7 +202,7 @@
             adjustment_atk: 1012,
             max_level: 80,
             level_1_atk: 0,
-            level_max_atk: 0,
+            level_max_atk: 0
         },
         computed: {
 
@@ -205,6 +220,13 @@
             ,
             result_level_formatted: function () {
                 return this.formatValue(this.result_level);
+            },
+            isWarning: function () {
+                // 切り上げたときに同じ値になるときは、WARNINGを出す
+                if (( parseInt(this.adjustment_atk) === Math.ceil(parseFloat(this.result_atk)))) {
+                    return true;
+                }
+                return false;
             },
             result_atk_formatted: function () {
                 return this.formatValue(this.result_atk);

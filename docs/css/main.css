@@ -21,3 +21,8 @@ label, input[type='checkbox'] {
 
 .question {
 }
+
+.warning{
+    color:red;
+    font-weight:bold;
+}
