@@ -24,6 +24,6 @@
     "sizes": "256x256",
     "type": "image/png"
   }],
-  "start_url": "/index.html",
+  "start_url": "https://nyamothellonia.github.io/ranryo/",
   "display": "standalone"
 }
