@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>蘭陵王調整手助け - ツール</title>
-
+    <link rel="manifest" href="./manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
     <link rel="shortcut icon" href="favicon.ico">
@@ -25,6 +25,14 @@
             crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            // register service worker
+            navigator.serviceWorker.register('js/service-worker.js');
+        }
+    </script>
+
 </head>
 <body style="background-color:#fcfcfc">
 <div class="container">
