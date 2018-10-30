@@ -87,11 +87,10 @@
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header" style="display:flex;">
-                        <div class="modal-title" id="exampleModalLabel">
-                            {{lastTarget.title}} </div>
-                        <div style="margin-left: auto;">
-                            {{lastIndex+1}}/{{lastTarget.data.length}}</div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            {{lastTarget.title}}
+                        </h5>
                     </div>
                     <div class="modal-body">
 
@@ -147,10 +146,11 @@
                             </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" v-on:click="prev()">◀</button>
-                            <button type="button" class="btn btn-primary" v-on:click="next()">▶</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
+                        <div class="modal-footer" style="display:flex;">
+                            <button type="button" class="btn btn-primary" v-on:click="prev()"><span class="glyphicon glyphicon-menu-left"></span></button>
+                            <div style="width:50px;display:flex;justify-content: center;align-items: center;">{{lastIndex+1}}/{{lastTarget.data.length}}</div>
+                            <button type="button" class="btn btn-primary" v-on:click="next()"><span class="glyphicon glyphicon-menu-right"></span></button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-left:auto;">閉じる</button>
                         </div>
                 </div>
             </div>
