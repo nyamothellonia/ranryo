@@ -19,12 +19,12 @@ fs.readdir('./tmp-image', function (err, files) {
 
   PNGCrop.cropToStream(imgBuffer, config, function (err, outputStream) {
     if (err) throw err;
-    outputStream.pipe(fs.createWriteStream(`tmp-image/dist/chara-image-list/${itemPath}`));
+    outputStream.pipe(fs.createWriteStream(`./dist/chara-image-list/${itemPath}`));
   });
 
   PNGCrop.cropToStream(imgBuffer, configIcon, function (err, outputStream) {
     if (err) throw err;
-    outputStream.pipe(fs.createWriteStream(`tmp-image/dist/chara-image-icon/${itemPath}`));
+    outputStream.pipe(fs.createWriteStream(`./dist/chara-image-icon/${itemPath}`));
   });
 });
 });
