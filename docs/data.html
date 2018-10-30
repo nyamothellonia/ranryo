@@ -57,9 +57,9 @@
                 <thead class="thead-inverse">
                 <tr>
                     <th>#</th>
-                    <th>Lv.Max<br>ATK</th>
-                    <th>調整後<br>ATK</th>
                     <th>調整LV</th>
+                    <th>調整後<br>ATK</th>
+                    <th>Lv.Max<br>ATK</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,11 +70,9 @@
                             {{mydata.name}}
                         </a>
                     </td>
-                    <td>{{mydata.lv_max}}</td>
+                    <td>{{mydata.adjust_lv}}</td>
                     <td>{{mydata.result_atk}}</td>
-                    <td>
-                        {{mydata.adjust_lv}}
-                    </td>
+                    <td>{{mydata.lv_max}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -101,21 +99,45 @@
                                 </img>
                             </template>
                             <template v-if="lastSelect.image === undefined">
-                                <div style="background-color:#cccccc; color:white;width:100%;height:100%;">No Image
+                                <div style="display:flex;background-color:#cccccc; color:white;width:100%;height:100%; align-items: center;justify-content: center;">
+                                    No Image
                                 </div>
                             </template>
                         </div>
 
-                        <div style="padding-left:20px;padding-right:20px;">
-                            <p>{{lastSelect.name}}</p>
-                            <p>Lv1のATK : {{lastSelect.lv_min}}</p>
-                            <p>LvMaxのATK : {{lastSelect.lv_max}}</p>
-                            <p>調整後ATK : {{lastSelect.result_atk}}</p>
-                            <p>調整後LV : {{lastSelect.adjust_lv}</p>
-                            <p>1LVの上昇ATK : {{lastSelect.atk_1_up}}</p>
-                            <a v-bind="{ href: lastSelect.url}" target="_blank">[公式Wiki]<i class="fa fa-external-link"
-                                                                                           aria-hidden="true"></i></a>
-
+                        <div style="padding-left:10px;width:50%;">
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <td colspan="2">{{lastSelect.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lv1のATK</td>
+                                    <td>{{lastSelect.lv_min}}</td>
+                                </tr>
+                                <tr>
+                                    <td>LvMaxのATK</td>
+                                    <td>{{lastSelect.lv_max}}</td>
+                                </tr>
+                                <tr>
+                                    <td>調整後ATK</td>
+                                    <td>{{lastSelect.result_atk}}</td>
+                                </tr>
+                                <tr>
+                                    <td>1LVの上昇ATK</td>
+                                    <td>{{lastSelect.atk_1_up}}</td>
+                                </tr>
+                                <tr v-if="lastSelect.other">
+                                    <td colspan="2">※ {{lastSelect.other}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a v-bind="{ href: lastSelect.url}" target="_blank">[公式Wiki]<i
+                                                class="fa fa-external-link"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="modal-footer">
