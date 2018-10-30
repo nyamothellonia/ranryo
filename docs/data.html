@@ -64,9 +64,9 @@
                 </thead>
                 <tbody>
 
-                <tr v-for="mydata in data1.data">
+                <tr v-for="(mydata, index) in data1.data">
                     <td>
-                        <a v-on:click="update(mydata,data1.title)" data-toggle="modal" data-target="#exampleModal">
+                        <a v-on:click="update(index,data1)" data-toggle="modal" data-target="#exampleModal">
                             {{mydata.name}}
                         </a>
                     </td>
@@ -87,62 +87,71 @@
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            {{lastTarget}}</h5>
+                    <div class="modal-header" style="display:flex;">
+                        <div class="modal-title" id="exampleModalLabel">
+                            {{lastTarget.title}} </div>
+                        <div style="margin-left: auto;">
+                            {{lastIndex+1}}/{{lastTarget.data.length}}</div>
                     </div>
-                    <div class="modal-body" style="display:flex;">
+                    <div class="modal-body">
 
-                        <div style="width:50%;">
-                            <template v-if="lastSelect.image !== undefined">
-                                <img v-bind:src="'data_images/'+lastSelect.image+'.png'" width="100%">
-                                </img>
-                            </template>
-                            <template v-if="lastSelect.image === undefined">
-                                <div style="display:flex;background-color:#cccccc; color:white;width:100%;height:100%; align-items: center;justify-content: center;">
-                                    No Image
-                                </div>
-                            </template>
-                        </div>
+                        <div style="display:flex;height:60vh;overflow:scroll;">
+                            <div style="width:50%;">
+                                <template v-if="lastSelect.image !== undefined">
+                                    <img v-bind:src="'data_images/'+lastSelect.image+'.png'" width="100%">
+                                    </img>
+                                </template>
+                                <template v-if="lastSelect.image === undefined">
+                                    <img src="data_images/no_data.png" width="100%">
+                                    </img>
+                                </template>
+                            </div>
 
-                        <div style="padding-left:10px;width:50%;">
-                            <table class="table table-striped">
-                                <tbody>
-                                <tr>
-                                    <td colspan="2">{{lastSelect.name}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Lv1のATK</td>
-                                    <td>{{lastSelect.lv_min}}</td>
-                                </tr>
-                                <tr>
-                                    <td>LvMaxのATK</td>
-                                    <td>{{lastSelect.lv_max}}</td>
-                                </tr>
-                                <tr>
-                                    <td>調整後ATK</td>
-                                    <td>{{lastSelect.result_atk}}</td>
-                                </tr>
-                                <tr>
-                                    <td>1LVの上昇ATK</td>
-                                    <td>{{lastSelect.atk_1_up}}</td>
-                                </tr>
-                                <tr v-if="lastSelect.other">
-                                    <td colspan="2">※ {{lastSelect.other}}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <a v-bind="{ href: lastSelect.url}" target="_blank">[公式Wiki]<i
-                                                class="fa fa-external-link"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div style="padding-left:10px;width:50%;">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2">{{lastSelect.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>調整LV</td>
+                                        <td>{{lastSelect.adjust_lv}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>調整後ATK</td>
+                                        <td>{{lastSelect.result_atk}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lv1のATK</td>
+                                        <td>{{lastSelect.lv_min}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>LvMaxのATK</td>
+                                        <td>{{lastSelect.lv_max}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1LVの上昇ATK</td>
+                                        <td>{{lastSelect.atk_1_up}}</td>
+                                    </tr>
+                                    <tr v-if="lastSelect.other">
+                                        <td colspan="2">※ {{lastSelect.other}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a v-bind="{ href: lastSelect.url}" target="_blank">[公式Wiki]<i
+                                                    class="fa fa-external-link"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" v-on:click="prev()">◀</button>
+                            <button type="button" class="btn btn-primary" v-on:click="next()">▶</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -178,14 +187,34 @@
         var app = new Vue({
             el: '#app',
             methods: {
-                update: function (mydata, target) {
-                    this.lastSelect = mydata;
+                update: function (id, target) {
                     this.lastTarget = target;
+                    this.lastIndex = id;
+                    this.lastSelect = target.data[id];
+                },
+                next : function () {
+                    this.lastIndex = this.lastIndex + 1;
+
+                    if( this.lastIndex >= this.lastTarget.data.length ) {
+                        this.lastIndex = 0;
+                    }
+
+                    this.lastSelect = this.lastTarget.data[this.lastIndex];
+                },
+                prev : function (){
+                    this.lastIndex = this.lastIndex - 1;
+
+                    if( this.lastIndex < 0 ) {
+                        this.lastIndex = this.lastTarget.data.length -1;
+                    }
+
+                    this.lastSelect = this.lastTarget.data[this.lastIndex];
                 }
             },
             data: {
-                lastSelect: {"name": "dummy"},
-                lastTarget: "dummy",
+                lastSelect: {name:"dummy"},
+                lastTarget: {data:[]},
+                lastIndex : 0,
                 data: [
                     {
                         title: "[武麗君]蘭陵王 (目標ATK:1012)",
@@ -342,7 +371,7 @@
                                 "adjust_lv": 72,
                                 "result_atk": 1035,
                                 "atk_1_up": 4.02,
-                                "image": "blanjetta",
+                                "image": "blanjetta2",
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.601~700_%EF%BC%BB%E6%AD%BB%E8%A1%93%E5%A3%AB%EF%BC%BD%E3%83%96%E3%83%A9%E3%83%B3%E3%82%B8%E3%82%A7%E3%83%83%E3%82%BF"
                             },
                             {
