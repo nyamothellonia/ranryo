@@ -7,6 +7,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="./js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Latest compiled and minified CSS -->
@@ -24,8 +25,6 @@
 
     <link rel="stylesheet" href="css/main.css">
     <script src="./js/vue.min.js"></script>
-    <link rel="stylesheet" href="css/lightbox.css">
-    <script src="./js/jquery.min.js"></script>
     <script src="js/lightbox.js" type="text/javascript"></script>
     <script>
         if ('serviceWorker' in navigator) {
@@ -58,32 +57,24 @@
                 <thead class="thead-inverse">
                 <tr>
                     <th>#</th>
-                    <th>Lv.1 ATK</th>
-                    <th>Lv.Max ATK</th>
-                    <th>調整レベル</th>
-                    <th>調整後ATK</th>
-                    <th>1レベでのATKの上昇値</th>
-                    <th>リンク</th>
+                    <th>Lv.Max<br>ATK</th>
+                    <th>調整後<br>ATK</th>
+                    <th>調整LV</th>
                 </tr>
                 </thead>
                 <tbody>
+
                 <tr v-for="mydata in data1.data">
                     <td>
-                        {{mydata.name}}
-                    </td>
-                    <td>{{mydata.lv_min}}</td>
-                    <td>{{mydata.lv_max}}</td>
-                    <td v-if="mydata.image !== undefined">
-                        <a target="_blank" v-bind:href="'images/'+mydata.image+'.png'">{{mydata.adjust_lv}} <i
-                                class="fa fa-external-link" aria-hidden="true"></i>
+                        <a v-on:click="update(mydata,data1.title)" data-toggle="modal" data-target="#exampleModal">
+                            {{mydata.name}}
                         </a>
                     </td>
-                    <td v-else>
+                    <td>{{mydata.lv_max}}</td>
+                    <td>{{mydata.result_atk}}</td>
+                    <td>
                         {{mydata.adjust_lv}}
                     </td>
-                    <td>{{mydata.result_atk}}</td>
-                    <td>{{mydata.atk_1_up}}</td>
-                    <td><a v-bind="{ href: mydata.url}"  target="_blank">[公式Wiki]<i class="fa fa-external-link" aria-hidden="true"></i></a></td>
                 </tr>
                 </tbody>
             </table>
@@ -92,6 +83,47 @@
         <p>
             <small>※ データは保証しません。あくまでも参考程度にしてください。</small>
         </p>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            {{lastTarget}}</h5>
+                    </div>
+                    <div class="modal-body" style="display:flex;">
+
+                        <div style="width:50%;">
+                            <template v-if="lastSelect.image !== undefined">
+                                <img v-bind:src="'data_images/'+lastSelect.image+'.png'" width="100%">
+                                </img>
+                            </template>
+                            <template v-if="lastSelect.image === undefined">
+                                <div style="background-color:#cccccc; color:white;width:100%;height:100%;">No Image
+                                </div>
+                            </template>
+                        </div>
+
+                        <div style="padding-left:20px;padding-right:20px;">
+                            <p>{{lastSelect.name}}</p>
+                            <p>Lv1のATK : {{lastSelect.lv_min}}</p>
+                            <p>LvMaxのATK : {{lastSelect.lv_max}}</p>
+                            <p>調整後ATK : {{lastSelect.result_atk}}</p>
+                            <p>調整後LV : {{lastSelect.adjust_lv}</p>
+                            <p>1LVの上昇ATK : {{lastSelect.atk_1_up}}</p>
+                            <a v-bind="{ href: lastSelect.url}" target="_blank">[公式Wiki]<i class="fa fa-external-link"
+                                                                                           aria-hidden="true"></i></a>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">閉じる</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <hr>
     <div style="padding:10px;height:100px;display:flex;flex-flow:row;justify-content: center;">
@@ -104,16 +136,15 @@
             </div>
         </a>
     </div>
-
     <script>
 
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
             a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
+                m = s.getElementsByTagName(o)[0];
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
@@ -124,13 +155,21 @@
 
         var app = new Vue({
             el: '#app',
+            methods: {
+                update: function (mydata, target) {
+                    this.lastSelect = mydata;
+                    this.lastTarget = target;
+                }
+            },
             data: {
+                lastSelect: {"name": "dummy"},
+                lastTarget: "dummy",
                 data: [
                     {
                         title: "[武麗君]蘭陵王向け (目標ATK:1012)",
                         data: [
                             {
-                                "name": "［炎帝の末裔］祝融",
+                                "name": "[炎帝の末裔]祝融",
                                 "lv_min": 320,
                                 "lv_max": 1030,
                                 "adjust_lv": 77,
@@ -140,7 +179,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.301~400_%EF%BC%BB%E7%82%8E%E5%B8%9D%E3%81%AE%E6%9C%AB%E8%A3%94%EF%BC%BD%E7%A5%9D%E8%9E%8D"
                             },
                             {
-                                "name": "［金色の神眼］アルベルダ",
+                                "name": "[金色の神眼]アルベルダ",
                                 "lv_min": 324,
                                 "lv_max": 1058,
                                 "adjust_lv": 75,
@@ -150,7 +189,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.701~800_%EF%BC%BB%E9%87%91%E8%89%B2%E3%81%AE%E7%A5%9E%E7%9C%BC%EF%BC%BD%E3%82%A2%E3%83%AB%E3%83%99%E3%83%AB%E3%83%80"
                             },
                             {
-                                "name": "［幻想剣］フェアリーフェンサー",
+                                "name": "[幻想剣]フェアリーフェンサー",
                                 "lv_min": 688,
                                 "lv_max": 1040,
                                 "adjust_lv": 73,
@@ -160,7 +199,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.501~600_%EF%BC%BB%E5%B9%BB%E6%83%B3%E5%89%A3%EF%BC%BD%E3%83%95%E3%82%A7%E3%82%A2%E3%83%AA%E3%83%BC%E3%83%95%E3%82%A7%E3%83%B3%E3%82%B5%E3%83%BC"
                             },
                             {
-                                "name": "［偽りの暗愚］北条氏政",
+                                "name": "[偽りの暗愚]北条氏政",
                                 "lv_min": 785,
                                 "lv_max": 1082,
                                 "adjust_lv": 61,
@@ -170,7 +209,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.901~1000_%EF%BC%BB%E5%81%BD%E3%82%8A%E3%81%AE%E6%9A%97%E6%84%9A%EF%BC%BD%E5%8C%97%E6%9D%A1%E6%B0%8F%E6%94%BF"
                             },
                             {
-                                "name": "［闇に堕ちた医師］ファウスト",
+                                "name": "[闇に堕ちた医師]ファウスト",
                                 "lv_min": 321,
                                 "lv_max": 1128,
                                 "adjust_lv": 68,
@@ -180,7 +219,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.201~300_%EF%BC%BB%E9%97%87%E3%81%AB%E5%A0%95%E3%81%A1%E3%81%9F%E5%8C%BB%E5%B8%AB%EF%BC%BD%E3%83%95%E3%82%A1%E3%82%A6%E3%82%B9%E3%83%88"
                             },
                             {
-                                "name": "［八蠢の魔手］ポーリュプス",
+                                "name": "[八蠢の魔手]ポーリュプス",
                                 "lv_min": 331,
                                 "lv_max": 1131,
                                 "adjust_lv": 68,
@@ -190,7 +229,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.301~400_%EF%BC%BB%E5%85%AB%E8%A0%A2%E3%81%AE%E9%AD%94%E6%89%8B%EF%BC%BD%E3%83%9D%E3%83%BC%E3%83%AA%E3%83%A5%E3%83%97%E3%82%B9"
                             },
                             {
-                                "name": "［死術士］ブランジェッタ",
+                                "name": "[死術士]ブランジェッタ",
                                 "lv_min": 749,
                                 "lv_max": 1067,
                                 "adjust_lv": 66,
@@ -200,7 +239,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.601~700_%EF%BC%BB%E6%AD%BB%E8%A1%93%E5%A3%AB%EF%BC%BD%E3%83%96%E3%83%A9%E3%83%B3%E3%82%B8%E3%82%A7%E3%83%83%E3%82%BF"
                             },
                             {
-                                "name": "［神敵］アリオーシュ",
+                                "name": "[神敵]アリオーシュ",
                                 "lv_min": 292,
                                 "lv_max": 1019,
                                 "adjust_lv": 79,
@@ -210,7 +249,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.001~100_%EF%BC%BB%E7%A5%9E%E6%95%B5%EF%BC%BD%E3%82%A2%E3%83%AA%E3%82%AA%E3%83%BC%E3%82%B7%E3%83%A5"
                             },
                             {
-                                "name": "［カンペキな勝利］狩魔 冥",
+                                "name": "[カンペキな勝利]狩魔 冥",
                                 "lv_min": 910,
                                 "lv_max": 1050,
                                 "adjust_lv": 58,
@@ -225,7 +264,7 @@
                         title: "[笑福到来]蘭陵王向け (目標ATK:848)",
                         data: [
                             {
-                                "name": "［双盾の戦士］サディエル",
+                                "name": "[双盾の戦士]サディエル",
                                 "lv_min": 414,
                                 "lv_max": 970,
                                 "adjust_lv": 77,
@@ -234,7 +273,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.501~600_%EF%BC%BB%E5%8F%8C%E7%9B%BE%E3%81%AE%E6%88%A6%E5%A3%AB%EF%BC%BD%E3%82%B5%E3%83%87%E3%82%A3%E3%82%A8%E3%83%AB"
                             },
                             {
-                                "name": "［水の精霊］ウンディーネ",
+                                "name": "[水の精霊]ウンディーネ",
                                 "lv_min": 263,
                                 "lv_max": 880,
                                 "adjust_lv": 75,
@@ -244,7 +283,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.001~100_%EF%BC%BB%E6%B0%B4%E3%81%AE%E7%B2%BE%E9%9C%8A%EF%BC%BD%E3%82%A6%E3%83%B3%E3%83%87%E3%82%A3%E3%83%BC%E3%83%8D"
                             },
                             {
-                                "name": "［仙女］織姫",
+                                "name": "[仙女]織姫",
                                 "lv_min": 239,
                                 "lv_max": 894,
                                 "adjust_lv": 74,
@@ -253,7 +292,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.001~100_%EF%BC%BB%E4%BB%99%E5%A5%B3%EF%BC%BD%E7%B9%94%E5%A7%AB"
                             },
                             {
-                                "name": "［黄金の双翼］フギンとムニン",
+                                "name": "[黄金の双翼]フギンとムニン",
                                 "lv_min": 278,
                                 "lv_max": 852,
                                 "adjust_lv": 79,
@@ -263,7 +302,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.1201~1300_%EF%BC%BB%E9%BB%84%E9%87%91%E3%81%AE%E5%8F%8C%E7%BF%BC%EF%BC%BD%E3%83%95%E3%82%AE%E3%83%B3%E3%81%A8%E3%83%A0%E3%83%8B%E3%83%B3"
                             },
                             {
-                                "name": "［衡奪の監視者］アラク",
+                                "name": "[衡奪の監視者]アラク",
                                 "lv_min": 631,
                                 "lv_max": 998,
                                 "adjust_lv": 47,
@@ -273,7 +312,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.501~600_%EF%BC%BB%E8%A1%A1%E5%A5%AA%E3%81%AE%E7%9B%A3%E8%A6%96%E8%80%85%EF%BC%BD%E3%82%A2%E3%83%A9%E3%82%AF"
                             },
                             {
-                                "name": "［天鱗の女傑］ゼラミス",
+                                "name": "[天鱗の女傑]ゼラミス",
                                 "lv_min": 561,
                                 "lv_max": 932,
                                 "adjust_lv": 61,
@@ -283,7 +322,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.1201~1300_%EF%BC%BB%E5%A4%A9%E9%B1%97%E3%81%AE%E5%A5%B3%E5%82%91%EF%BC%BD%E3%82%BC%E3%83%A9%E3%83%9F%E3%82%B9"
                             },
                             {
-                                "name": "［公家の姫］三条の方",
+                                "name": "[公家の姫]三条の方",
                                 "lv_min": 614,
                                 "lv_max": 872,
                                 "adjust_lv": 72,
@@ -298,7 +337,7 @@
                         data: [
 
                             {
-                                "name": "［空雷竜］ブリッツドラゴン",
+                                "name": "[空雷竜]ブリッツドラゴン",
                                 "lv_min": 404,
                                 "lv_max": 1200,
                                 "adjust_lv": 78,
@@ -308,7 +347,7 @@
                                 "url": "https://xn--cckp5c6czi2302avwxa.gamematome.jp/game/964/wiki/%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC%E6%83%85%E5%A0%B1_No.301~400_%EF%BC%BB%E7%A9%BA%E9%9B%B7%E7%AB%9C%EF%BC%BD%E3%83%96%E3%83%AA%E3%83%83%E3%83%84%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3"
                             },
                             {
-                                "name": "［魔竜］マギラ",
+                                "name": "[魔竜]マギラ",
                                 "lv_min": 612,
                                 "lv_max": 1288,
                                 "adjust_lv": 68,

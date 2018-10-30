@@ -26,3 +26,6 @@ label, input[type='checkbox'] {
     color:red;
     font-weight:bold;
 }
+#container {
+    display: flex; /* グリッドレイアウト */
+}

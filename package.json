@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "crop-image": "node npm-scripts/crop-image.js"
   },
   "author": "nyam_othellonia <nyam_othellonia@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "png-crop": "0.0.2"
+  }
 }
