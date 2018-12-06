@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "cd docs && lite-server",
-    "crop-image": "node npm-scripts/crop-image.js"
+    "crop-image": "node npm-scripts/crop-image.js",
+    "pngquant" : "cd ./tmp-image && ./pngquant --ext .png --force ../dist/chara-image-list/*.png"
   },
   "author": "nyam_othellonia <nyam_othellonia@gmail.com>",
   "license": "MIT",
